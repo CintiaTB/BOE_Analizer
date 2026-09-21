@@ -21,6 +21,7 @@ Abre tu terminal o línea de comandos dentro de la carpeta del proyecto e instal
 
 ```bash
 pip install beautifulsoup4 pdfplumber requests
+```
 
 Paso 3: ⚙️ Configuración del Envío de Correos (Google Apps Script)
 Para que el script pueda enviarte correos automáticos sin necesidad de configurar servidores SMTP complejos, utilizaremos Google Apps Script de forma totalmente gratuita.
