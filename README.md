@@ -30,7 +30,7 @@ Entra en Google Apps Script e inicia sesión con tu cuenta de Google.
 
 Haz clic en Nuevo proyecto.
 
-Borra todo el código que aparece por defecto y pega el siguiente script:
+Borra todo el código que aparece por defecto y pega el siguiente script:```
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
@@ -47,6 +47,7 @@ function doPost(e) {
                          .setMimeType(ContentService.MimeType.JSON);
   }
 }
+```
 Haz clic en el botón superior derecho Implementar > Nueva implementación.
 
 En "Seleccionar tipo", elige Aplicación web.
