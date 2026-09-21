@@ -92,3 +92,97 @@ pause
 Abre el Programador de Tareas de Windows, crea una tarea básica programada diariamente a la hora que prefieras y asóciala a la ejecución de este archivo .bat.
 
 💡 Consejo: Te recomendamos programarlo sobre las 09:30 o 10:00 de la mañana, asegurando así que el BOE diario ya se encuentre completamente publicado y accesible en los servidores oficiales.
+Markdown
+# 🏛️ Automated BOE Radar with Email Alerts
+
+Python script designed to daily track the **Official State Gazette of Spain (BOE)**, filter decrees, resolutions, or regulations using customized keywords, and send a summary directly to your email using a free Google Apps Script Webhook.
+
+---
+
+## 📋 Prerequisites
+
+1. **Python** installed (version 3.8 or higher) on your computer.
+2. A **Google (Gmail)** account.
+
+---
+
+## 🚀 Step-by-Step Installation Guide
+
+### Step 1: Clone or download the repository
+Download the project files into a local folder on your computer.
+
+### Step 2: Install required dependencies
+Open your terminal or command prompt inside the project folder and install the required libraries by running:
+
+```bash
+pip install beautifulsoup4 pdfplumber requests
+```
+Step 3: ⚙️ Configuring Email Delivery (Google Apps Script)
+To allow the script to send you automated emails without configuring complex SMTP servers, we will use Google Apps Script completely free of charge.
+
+Go to Google Apps Script and sign in with your Google account.
+
+Click on New project.
+
+Delete all the default code and paste the following script:
+```bash
+JavaScript
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var destinatarios = data.destinatarios;
+    var asunto = data.asunto;
+    var cuerpo = data.cuerpo;
+    
+    MailApp.sendEmail(destinatarios, asunto, cuerpo);
+    
+    return ContentService.createTextOutput(JSON.stringify({"status": "ok"}))
+                         .setMimeType(ContentService.MimeType.JSON);
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({"status": "error", "message": error.toString()}))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+```
+Click on the top right button Deploy > New deployment.
+
+Under "Select type", choose Web app.
+
+Configure the following fields:
+
+Description: API BOE Email Alerts
+
+Execute as: Me
+
+Who has access: Anyone (Important so Python can communicate with it).
+
+Click Deploy, grant the requested permissions for your Google account, and copy the web app URL generated at the end.
+
+Step 4: 🛠️ Configuring the Python Script
+Open the rastreador_boe.py file with any code editor (such as VS Code or Notepad).
+
+Modify the configuration variables at the top of the file:
+
+Paste your Webhook URL in URL_APPS_SCRIPT = "YOUR_URL_HERE".
+
+Add your email address in DESTINATARIOS = ["your_email@gmail.com"].
+
+Customize your PALABRAS_CLAVE (Keywords) list with the terms you want to monitor.
+
+Save your changes.
+
+Step 5: ⏱️ Daily Automation in Windows (Optional)
+If you want the script to run automatically every workday unattended:
+
+Create a .bat file (for example, run.bat) inside the project folder with the following content:
+```bash
+DOS
+@echo off
+title BOE Tracker
+cd /d "%~dp0"
+python rastreador_boe.py
+pause
+```
+Open the Windows Task Scheduler, create a basic task scheduled to run daily at your preferred time, and link it to execute this .bat file.
+
+💡 Tip: We recommend scheduling it around 09:30 or 10:00 AM, ensuring that the daily BOE is fully published and accessible on the official servers.
