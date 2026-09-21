@@ -22,6 +22,7 @@ Abre tu terminal o línea de comandos dentro de la carpeta del proyecto e instal
 
 ```bash
 pip install beautifulsoup4 pdfplumber requests
+```
 Paso 3: ⚙️ Configuración del Envío de Correos (Google Apps Script)
 Para que el script pueda enviarte correos automáticos sin necesidad de configurar servidores SMTP complejos, utilizaremos Google Apps Script de forma totalmente gratuita.
 
@@ -30,7 +31,7 @@ Entra en Google Apps Script e inicia sesión con tu cuenta de Google.
 Haz clic en Nuevo proyecto.
 
 Borra todo el código que aparece por defecto y pega el siguiente script:
-
+```bash
 JavaScript
 function doPost(e) {
   try {
@@ -48,6 +49,7 @@ function doPost(e) {
                          .setMimeType(ContentService.MimeType.JSON);
   }
 }
+```
 Haz clic en el botón superior derecho Implementar > Nueva implementación.
 
 En "Seleccionar tipo", elige Aplicación web.
@@ -79,13 +81,14 @@ Paso 5: ⏱️ Automatización Diaria en Windows (Opcional)
 Si deseas que el script se ejecute automáticamente todos los días laborables de forma desatendida:
 
 Crea un archivo .bat (por ejemplo, ejecutar.bat) dentro de la carpeta del proyecto con el siguiente contenido:
-
+```bash
 DOS
 @echo off
 title Rastreador BOE
 cd /d "%~dp0"
 python rastreador_boe.py
 pause
+```
 Abre el Programador de Tareas de Windows, crea una tarea básica programada diariamente a la hora que prefieras y asóciala a la ejecución de este archivo .bat.
 
 💡 Consejo: Te recomendamos programarlo sobre las 09:30 o 10:00 de la mañana, asegurando así que el BOE diario ya se encuentre completamente publicado y accesible en los servidores oficiales.
