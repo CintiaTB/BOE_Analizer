@@ -18,10 +18,11 @@ Descarga los archivos del proyecto en una carpeta local de tu equipo.
 
 ### Paso 2: Instalar las dependencias necesarias
 Abre tu terminal o línea de comandos dentro de la carpeta del proyecto e instala las librerías necesarias ejecutando:
+
 ```bash
 pip install beautifulsoup4 pdfplumber requests
 
-### Paso 3:⚙️ Configuración del Envío de Correos (Google Apps Script)
+Paso 3: ⚙️ Configuración del Envío de Correos (Google Apps Script)
 Para que el script pueda enviarte correos automáticos sin necesidad de configurar servidores SMTP complejos, utilizaremos Google Apps Script de forma totalmente gratuita.
 
 Entra en Google Apps Script e inicia sesión con tu cuenta de Google.
@@ -29,8 +30,6 @@ Entra en Google Apps Script e inicia sesión con tu cuenta de Google.
 Haz clic en Nuevo proyecto.
 
 Borra todo el código que aparece por defecto y pega el siguiente script:
-
-JavaScript
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
@@ -61,7 +60,7 @@ Quién tiene acceso: Cualquier usuario (Importante para que Python pueda comunic
 
 Haz clic en Implementar, concede los permisos de tu cuenta de Google que te solicite y copia la URL de la aplicación web que te aparecerá al finalizar.
 
-### Paso 4: 🛠️ Configuración del Script de Python
+Paso 4: 🛠️ Configuración del Script de Python
 Abre el archivo rastreador_boe.py con cualquier editor de código (como VS Code o Bloc de notas).
 
 Modifica las variables de la sección de configuración al inicio del archivo:
@@ -74,13 +73,15 @@ Personaliza tu lista de PALABRAS_CLAVE con los términos que desees vigilar.
 
 Guarda los cambios.
 
-### Paso 5: ⏱️ Automatización Diaria en Windows (Opcional)
+Paso 5: ⏱️ Automatización Diaria en Windows (Opcional)
 Si deseas que el script se ejecute automáticamente todos los días laborables de forma desatendida:
 
-Crea un archivo .bat (por ejemplo, ejecutar.bat) con el siguiente contenido:
-
-DOS
+Crea un archivo .bat (por ejemplo, ejecutar.bat) dentro de la carpeta del proyecto con el siguiente contenido:
 @echo off
-cd /d "C:\Ruta\De\Tu\Carpeta"
+title Rastreador BOE
+cd /d "%~dp0"
 python rastreador_boe.py
-Abre el Programador de Tareas de Windows, crea una tarea básica programada diariamente a la hora que prefieras y asígnale la ejecución de este archivo .bat
+pause
+Abre el Programador de Tareas de Windows, crea una tarea básica programada diariamente a la hora que prefieras y asóciala a la ejecución de este archivo .bat.
+
+💡 Consejo: Te recomendamos programarlo sobre las 09:30 o 10:00 de la mañana, asegurando así que el BOE diario ya se encuentre completamente publicado y accesible en los servidores oficiales.
