@@ -1,3 +1,4 @@
+Markdown
 # 🏛️ Radar Automatizado del BOE con Alertas por Email
 
 Script en Python diseñado para rastrear diariamente el **Boletín Oficial del Estado (BOE)**, filtrar decretos, resoluciones o normativas mediante palabras clave personalizadas y enviar un resumen directamente a tu correo electrónico utilizando un Webhook gratuito de Google Apps Script.
@@ -21,8 +22,6 @@ Abre tu terminal o línea de comandos dentro de la carpeta del proyecto e instal
 
 ```bash
 pip install beautifulsoup4 pdfplumber requests
-```
-
 Paso 3: ⚙️ Configuración del Envío de Correos (Google Apps Script)
 Para que el script pueda enviarte correos automáticos sin necesidad de configurar servidores SMTP complejos, utilizaremos Google Apps Script de forma totalmente gratuita.
 
@@ -30,7 +29,9 @@ Entra en Google Apps Script e inicia sesión con tu cuenta de Google.
 
 Haz clic en Nuevo proyecto.
 
-Borra todo el código que aparece por defecto y pega el siguiente script:```
+Borra todo el código que aparece por defecto y pega el siguiente script:
+
+JavaScript
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
@@ -47,7 +48,6 @@ function doPost(e) {
                          .setMimeType(ContentService.MimeType.JSON);
   }
 }
-```
 Haz clic en el botón superior derecho Implementar > Nueva implementación.
 
 En "Seleccionar tipo", elige Aplicación web.
@@ -79,6 +79,8 @@ Paso 5: ⏱️ Automatización Diaria en Windows (Opcional)
 Si deseas que el script se ejecute automáticamente todos los días laborables de forma desatendida:
 
 Crea un archivo .bat (por ejemplo, ejecutar.bat) dentro de la carpeta del proyecto con el siguiente contenido:
+
+DOS
 @echo off
 title Rastreador BOE
 cd /d "%~dp0"
